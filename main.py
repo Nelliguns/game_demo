@@ -4,7 +4,7 @@ import pygame
 # from pygame.locals import * 
 
 pygame.init()
-clock = pygame.Clock
+clock = pygame.Clock()
 pygame.display.set_caption("My game!")
 
 WINDOW_SIZE = (400, 400)
