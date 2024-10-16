@@ -9,7 +9,8 @@ pygame.display.set_caption("My game!")
 
 WINDOW_SIZE = (400, 400)
 
-screen = pygame.display.set_mode(WINDOW_SIZE)
+screen = pygame.display.set_mode((WINDOW_SIZE[0] * 2, WINDOW_SIZE[1] * 2))
+display = pygame.Surface((400, 400))
 
 player_img = pygame.image.load("data/images/00.png").convert()
 player_img.set_colorkey((0, 0, 0))
@@ -28,8 +29,8 @@ jump_sfx.set_volume(0.2)
 test_rect = pygame.Rect(100, 100, 100, 50)
 
 while True:
-    screen.fill((0, 0, 0))
-    screen.blit(player_img, player_location)
+    display.fill((0, 0, 0))
+    display.blit(player_img, player_location)
 
     if player_location[1] > WINDOW_SIZE[1] - player_img.get_height():
         player_y_momentum = - player_y_momentum
@@ -46,9 +47,9 @@ while True:
     player_rect.x, player_rect.y = player_location
 
     if player_rect.colliderect(test_rect):
-        pygame.draw.rect(screen, (255, 0, 0), test_rect)
+        pygame.draw.rect(display, (255, 0, 0), test_rect)
     else:
-        pygame.draw.rect(screen, (0, 0, 255), test_rect)
+        pygame.draw.rect(display, (0, 0, 255), test_rect)
         
 
 
@@ -68,6 +69,6 @@ while True:
                 moving_left = False
             
 
-
+    screen.blit(pygame.transform.scale(display, (screen.get_width(), screen.get_height())))
     pygame.display.update()
     clock.tick(60)
