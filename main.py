@@ -22,6 +22,9 @@ player_y_momentum = 0
 
 player_rect = pygame.Rect(*player_location, *player_img.get_size())
 
+jump_sfx = pygame.mixer.Sound("data/sfx/jump.wav")
+jump_sfx.set_volume(0.2)
+
 test_rect = pygame.Rect(100, 100, 100, 50)
 
 while True:
@@ -30,6 +33,7 @@ while True:
 
     if player_location[1] > WINDOW_SIZE[1] - player_img.get_height():
         player_y_momentum = - player_y_momentum
+        jump_sfx.play()
     else:
         player_y_momentum += 0.2
     player_location[1] += player_y_momentum
